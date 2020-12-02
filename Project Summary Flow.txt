@@ -1,0 +1,47 @@
+SMS Free Message using TWILIO Account
+-------------------------------------
+Step.1
+------
+Project Installation
+
+->composer create-project --prefer-dist laravel/laravel blog
+
+Step.2
+------
+Project Run
+
+->php artisan serve
+
+Step.3
+------
+Project Set Up
+
+->Open Acc to Twilio Acc
+->To write .env	file
+		TWILIO_SID="AC3b1783d09eb215934a7f2b370c341c79"
+		TWILIO_AUTH_TOKEN="4e18fa6f57547dc211bc984edc6ec819"
+		TWILIO_NUMBER="(470) 299-9767"
+
+Step.4
+------
+To write code in welcome.blade.php(Input Form->PhoneNo,Message,Send Button,..)
+And,to install twilio
+->composer require twilio/sdk
+And to write Web.php
+	
+	Route::post('/sendmsg',function(Request $request){
+		$sid =getenv("TWILIO_SID");
+		$auth_token=getenv("TWILIO_AUTH_TOKEN");
+		$twilio_number= getenv("TWILIO_NUMBER");
+
+		$client =new Client($sid,$auth_token);
+		$client->messages->create($request->phone_number, ['from' => $twilio_number, 'body' =>$request->message]);
+		return back();
+
+		})->name("sendMessage");
+
+So,Finished.
+
+
+THANK YOU......
+
